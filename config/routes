@@ -32,3 +32,5 @@
 /del_categoria/#CategoriaId DelCategorias POST
 
 /del_filme/#FilmeId         DelFilmes POST
+
+/carregar_user/#UserId      CarregarUser POST

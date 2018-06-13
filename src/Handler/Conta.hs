@@ -83,3 +83,8 @@ postDelFilmes id = do
       runDB $ deleteWhere [CategoriaFilmeFid ==. id]
       runDB $ delete id
       sendStatusJSON ok200 (object ["resp" .= (toJSON True)])
+
+postCarregarUser:: UserId -> Handler Value
+postCarregarUser uid = do
+     retorno <- runDB $ get404 uid
+     sendStatusJSON ok200 (object ["resp" .= (toJSON retorno)])      
