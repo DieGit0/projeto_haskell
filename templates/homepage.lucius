@@ -93,3 +93,38 @@ a.link {
     display: block;
     padding-left: 84px;
 }
+
+#container_diretores {
+    width: 755px;
+    margin-top: -62px;
+    margin-right: 0px;
+    display:block;
+    display: none;
+    padding-left: 84px;
+}
+
+.fade-scale {
+  transform: scale(0);
+  opacity: 0;
+  -webkit-transition: all .35s linear;
+  -o-transition: all .35s linear;
+  transition: all .35s linear;
+}
+
+.fade-scale.in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-header {
+    background-color: #eaeaf3a6;
+}
+
+.modal-content {
+    border: 3px outset #a09b9b;
+    background-color: #0003105c;
+}
+
+#lista_filmes {
+    margin-top: 60px;
+}
