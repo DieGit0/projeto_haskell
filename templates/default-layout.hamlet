@@ -1,6 +1,6 @@
 
 <!-- Static navbar -->
-<nav .navbar.navbar-default.navbar-static-top>
+<nav .navbar-default.navbar-static-top.menu-superior>
     <div .container>
         <div .navbar-header>
             <button type="button" .navbar-toggle.collapsed data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -10,20 +10,17 @@
                 <span class="icon-bar"></span>
 
         <div #navbar .collapse.navbar-collapse>
-            <ul .nav.navbar-nav>
-                $forall MenuItem label route _ <- navbarLeftFilteredMenuItems
-                    <li :Just route == mcurrentRoute:.active>
-                        <a href="@{route}">#{label}
-
-            <ul .nav.navbar-nav.navbar-right>
-                $forall MenuItem label route _ <- navbarRightFilteredMenuItems
-                    <li :Just route == mcurrentRoute:.active>
-                        <a href="@{route}">#{label}
+            <ul #nav-esquerda .nav.navbar-nav>
+                <!-- <li>
+                    <a href=@{HomeR}>Home -->
+            <ul #nav-direita .nav.navbar-nav.navbar-right.navegacao-direita>
+                
 
 <!-- Page Contents -->
 
 <div .container>
-    $if not $ Just HomeR == mcurrentRoute
+
+<!--    $if not $ Just HomeR == mcurrentRoute
         <ul .breadcrumb>
             $forall bc <- parents
                 <li>
@@ -37,7 +34,7 @@
 
 $if (Just HomeR == mcurrentRoute)
     ^{widget}
-$else
+$else -->
     <div .container>
         <div .row>
             <div .col-md-12>
@@ -47,4 +44,4 @@ $else
 <footer .footer>
     <div .container>
         <p .text-muted>
-            #{appCopyright $ appSettings master}
+            <!--#{appCopyright $ appSettings master} -->
