@@ -1,34 +1,63 @@
-document.getElementById(#{toJSON aDomId}).innerHTML = "This text was added by the Javascript part of the homepage widget.";
+function buscarFilmes(categoria=null, diretor=null) {
+    if(categoria) {
+        $.ajax({
+          url: "/categoria",
+          method: "POST",
+          dataType: "JSON",
+          data: {"categoriaId": categoria},
+          success: function(resultado){             
+              $('.filme_box').each(function(){
+                  $(this).remove();
+              });
+            
+                for(var i = 0; i < Object.keys(resultado.resp).length; i++) {
+                    $('#lista_filmes').append("<div class='col-md-3 filme_box' onClick='abrirFilme(this)' data-toggle='modal' data-target='#myModal'><ul type='none'><li> <h3 class='titulo_filme'>"+resultado.resp[i][0].nome+"</li><li> <img class='img_filme' nome-video='"+resultado.resp[i][0].arquivo+"' src='static/img/"+resultado.resp[i][0].foto+"'></li></ul></div>");
+                }
+          
+          }
 
-$(function() {
-  $("##{rawJS commentFormId}").submit(function(event) {
-    event.preventDefault();
+      });
+    }else if(diretor) {
+        $.ajax({
+          url: "/diretor",
+          method: "POST",
+          dataType: "JSON",
+          data: {"diretorId": diretor},
+          success: function(resultado){
+              $('.filme_box').each(function(){
+                  $(this).remove();
+              });
+            
+                for(var i = 0; i < Object.keys(resultado.resp).length; i++) {
+                    $('#lista_filmes').append("<div class='col-md-3 filme_box' onClick='abrirFilme(this)' data-toggle='modal' data-target='#myModal'><ul type='none'><li> <h3 class='titulo_filme'>"+resultado.resp[i].nome+"</li><li> <img class='img_filme' nome-video='"+resultado.resp[i].arquivo+"' src='static/img/"+resultado.resp[i].foto+"'></li></ul></div>");
+                }
+          
+          }
 
-    var message = $("##{rawJS commentTextareaId}").val();
-    // (Browsers that enforce the "required" attribute on the textarea won't see this alert)
-    if (!message) {
-      alert("Please fill out the comment form first.");
-      return;
-    }
+      });
+    }else{
+        var busca = " ";
+        if(!$("#buscador").val() || $("#buscador").val() == " ") {
+            busca = " ";
+        }else{
+            busca = $("#buscador").val().trim();
+        }
+      $.ajax({
+          url: "/inicio",
+          method: "post",
+          dataType: "JSON",
+          data: {"nome":busca},
+          success: function(resultado){
+              $('.filme_box').each(function(){
+                  $(this).remove();
+              });
+            
+                for(var i = 0; i < Object.keys(resultado.resp).length; i++) {
+                    $('#lista_filmes').append("<div class='col-md-3 filme_box' onClick='abrirFilme(this)' data-toggle='modal' data-target='#myModal'><ul type='none'><li> <h3 class='titulo_filme'>"+resultado.resp[i].nome+"</li><li> <img class='img_filme' nome-video='"+resultado.resp[i].arquivo+"' src='static/img/"+resultado.resp[i].foto+"'></li></ul></div>");
+                }
+          
+          }
 
-    // Make an AJAX request to the server to create a new comment
-    $.ajax({
-      url: '@{CommentR}',
-      type: 'POST',
-      contentType: "application/json",
-      data: JSON.stringify({
-        message: message,
-      }),
-      success: function (data) {
-        var newNode = $("<li></li>");
-        newNode.text(data.message);
-        console.log(data);
-        $("##{rawJS commentListId}").append(newNode);
-      },
-      error: function (data) {
-        console.log("Error creating comment: " + data);
-      },
-    });
-
-  });
-});
+      });
+  }
+}
