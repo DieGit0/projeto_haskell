@@ -1,0 +1,65 @@
+$(document).ready(function(){
+	carregarUser();
+})
+
+function carregarUser() {
+	$.ajax({
+		        url: "/sessao",
+		        method: "post",
+		        dataType: "JSON",
+		        success: function(resultado){		           
+		           var id_user = resultado.id;
+		           $.ajax({
+					        url: "/carregar_user/"+resultado.id,
+					        method: "post",
+					        dataType: "JSON",
+					        success: function(resultado){		           
+					           $('#hident2').val(resultado.resp.nome);
+					           $('#hident3').val(resultado.resp.email);
+					           $('#hident4').val(resultado.resp.senha);
+					           $('#hident5').val(resultado.resp.dataNasc);
+					           $('#id_user').val(id_user);
+					        
+					        }
+
+					    });
+		        
+		        }
+
+		    });
+}
+
+$("#form_user").submit(function(e) {
+ 	e.preventDefault();
+
+ 	swal({
+		  title: "Deseja atualizar este cadastro?",
+		  text: "",
+		  icon: "warning",
+		  buttons: ["Cancelar","Confirmar"],
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+
+		  	$.ajax({
+				        url: "/atualizar_user/"+$('#id_user').val()+"/"+$('#hident2').val()+"/"+$('#hident3').val()+"/"+$('#hident4').val()+"/"+$('#hident5').val(),
+				        method: "post",
+				        dataType: "JSON",
+				        success: function(resultado){		           
+				        	carregarUser();
+
+				        	swal(
+								  'OK!',
+								  'Usuário atualizado com sucesso!',
+								  'success'
+								);
+				        }
+
+				    }); 
+			    
+		  }
+		});
+
+		
+});
