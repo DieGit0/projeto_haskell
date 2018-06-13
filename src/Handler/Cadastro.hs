@@ -9,6 +9,8 @@ module Handler.Cadastro where
 import Import
 import Yesod.Form.Bootstrap3
 import Database.Persist.Postgresql
+import Text.Julius
+import Text.Lucius
 
 cadastroPostForm:: Form User
 cadastroPostForm = renderDivs $ User  
@@ -29,9 +31,16 @@ postCadastrarR = do
     case res of
         FormSuccess user -> do
             uid <- runDB $ insert user
-            defaultLayout $ do 
-               [whamlet|
-                    <h1>
-                        User #{fromSqlKey uid} inserido(a) com sucesso!  
-               |]
+            defaultLayout $ do               
+               toWidget
+                    [julius|
+                        swal({
+                              title: "Cadastro Realizado!",
+                              text: "Usuário inserido com sucesso.",
+                              type: 'success',
+                              confirmButtonText: 'OK'
+                            }).then((result) => {
+                                window.location.replace("/");
+                            })
+                    |]                 
         _ -> redirect HomeR        
