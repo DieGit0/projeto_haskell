@@ -1,0 +1,7 @@
+<div id="login">
+     <h1 id="login_titulo"> Entrar
+
+
+     <form method=post action=@{AutenticarR} enctype=#{enctype}>
+         ^{widget}<br/>
+         <button type="submit" id="botao-logar" class="btn btn-success"> Entrar

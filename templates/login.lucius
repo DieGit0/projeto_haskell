@@ -1,0 +1,36 @@
+body { 
+  background: url("/static/img/img_login.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#login {
+	color: #787c80;
+	width: 550px;
+	padding: 104px;
+    padding-top: 40px;
+    border: 2px outset #99989c;
+    background-color: #1b252d;
+    margin: 171px auto 0px auto;
+}
+
+#botao-logar {
+	  border: 1px;
+    background-color: #50515f;    
+    padding: 11px 140px;
+    font-weight: bolder;
+    float: right;
+    font-size: 19px;
+    trasition: .5s
+}
+
+#botao-logar:hover {
+	background-color: #797a80;
+}
+
+#login_titulo {
+	margin-top: 0px;
+	font-weight: bolder;
+}
