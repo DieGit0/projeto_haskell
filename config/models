@@ -1,3 +1,10 @@
 -- By default this file is used by `persistFileWith` in Model.hs (which is imported by Foundation.hs)
 -- Syntax for this file here: https://github.com/yesodweb/persistent/blob/master/docs/Persistent-entity-syntax.md
 
+User json
+    nome        Text sqltype=varchar(255) default=NULL
+    email       Text sqltype=varchar(255) default=NULL
+    senha       Text sqltype=varchar(255) default=NULL
+    dataNasc    Day
+    UniqueEmail email
+    deriving Show
