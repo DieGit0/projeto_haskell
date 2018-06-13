@@ -34,3 +34,5 @@
 /del_filme/#FilmeId         DelFilmes POST
 
 /carregar_user/#UserId      CarregarUser POST
+
+/atualizar_user/#UserId/#Text/#Text/#Text/#Day AtualizarUser POST

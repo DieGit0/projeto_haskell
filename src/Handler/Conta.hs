@@ -87,4 +87,9 @@ postDelFilmes id = do
 postCarregarUser:: UserId -> Handler Value
 postCarregarUser uid = do
      retorno <- runDB $ get404 uid
-     sendStatusJSON ok200 (object ["resp" .= (toJSON retorno)])      
+     sendStatusJSON ok200 (object ["resp" .= (toJSON retorno)])
+
+postAtualizarUser:: UserId -> Text -> Text -> Text -> Day -> Handler Value
+postAtualizarUser uid nome email senha dataNasc = do
+     runDB $ updateWhere [UserId ==. uid] [UserNome =. nome, UserEmail =. email, UserSenha =. senha, UserDataNasc =. dataNasc]
+     sendStatusJSON ok200 (object ["resp" .= (toJSON True)])         
