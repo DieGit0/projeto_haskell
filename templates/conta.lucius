@@ -1,0 +1,74 @@
+#diretores {
+    margin-top: 95px;
+	margin-left: -105px;
+    padding: 16px 57px;
+    font-size: 22px;
+}
+
+#categorias {
+	margin-left: -105px;
+    padding: 16px 51px;
+    font-size: 22px;
+}
+
+#filmes {
+	margin-left: -105px;
+    padding: 16px 72px;
+    font-size: 22px;
+}
+
+#usuario {
+	margin-left: -105px;
+    padding: 16px 65px;
+    font-size: 22px;
+}
+
+.item_lista{
+    background-color: #3a5c7d;
+    color: #ffffff;
+    font-weight: bolder;
+    font-size: 23px;
+    margin-bottom: 7px;
+    text-align: center;
+    margin-left: 190px;
+}
+
+.excluir {
+	float: right;
+    padding: 3px 18px;
+    font-weight: bolder;
+}
+
+.editar {
+    margin-top: 0px;
+    margin-right: -45px;
+    padding: 3px 18px;
+    font-weight: bolder;
+}
+
+.btn-add {
+    font-size: 23px;
+    padding: 1px 17px;
+    float: right;
+}
+
+#lista {
+    margin-top: -317px;
+}
+
+.datatable {
+    width: 74% !important;
+    margin-left: 261px !important;
+    background-color: #a3cdd4 !important;
+    color: black !important;
+    font-size: 18px;
+    padding: 31px;
+}
+
+body { 
+  background: url("/static/img/img_conta.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
