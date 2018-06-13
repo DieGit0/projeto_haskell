@@ -1,3 +1,33 @@
+var contador = 0;
+
+$(document).ready(function(){
+  $(".img_filme").each(function(){
+    $(this).attr("id",contador++);
+  });
+});
+
+$("#busca_especializada").click(function(){
+    $("#panel").slideToggle();
+});
+
+$('#categorias').click(function(){
+    $('#container_diretores').slideUp();
+  $("#container_categorias").slideToggle();
+});
+
+$('#diretores').click(function(){
+    $('#container_categorias').slideUp();
+  $("#container_diretores").slideToggle();
+});
+
+$('#buscador').keyup(function(){
+  buscarFilmes();
+});
+
+function abrirFilme(elemento) {
+  $("#video").attr("src","static/filmes/"+$(elemento).children().children().find("img").attr("nome-video"));
+}
+
 function buscarFilmes(categoria=null, diretor=null) {
     if(categoria) {
         $.ajax({
