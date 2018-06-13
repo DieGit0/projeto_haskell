@@ -37,4 +37,11 @@ getContaR = do
                  toWidget $(juliusFile "templates/conta_user.julius")
                  toWidget $(luciusFile "templates/conta_user.lucius")
                  $(whamletFile "templates/conta_user.hamlet")
-     
+
+postListaFilmes:: Handler Value
+postListaFilmes = do
+      filmesLista <- runDB $ selectList [] [Asc FilmeNome]
+      filmes      <- return $ fmap (\(Entity _ filme) -> filme) filmesLista
+      filmesdid       <- return $ fmap (\(Filme _ _ _ filmedid) -> filmedid) filmes
+      diretoresLista    <- sequence $ fmap (\did -> runDB $ selectList [DiretorId ==. did] []) filmesdid
+      sendStatusJSON ok200 (object ["resp" .= (toJSON filmesLista),"dir" .= (toJSON diretoresLista)])
