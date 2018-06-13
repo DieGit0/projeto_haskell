@@ -1,0 +1,41 @@
+body { 
+  background: url("/static/img/img_post.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.required {
+	margin-bottom: 20px;
+}
+
+#titulo_post {
+	margin-bottom: 26px;
+	margin-top: 0;
+	font-weight: bolder;
+}
+
+#form_post {
+	color: #787c80;
+    width: 603px;
+    margin-top: 20px;
+    border: 2px outset #99989c;
+    padding: 29px;
+    background-color: #1b252d;
+    height: 635px;
+}
+
+#botao-post {
+	  border: 1px;
+    background-color: #50515f;    
+    padding: 11px 228px;
+    font-weight: bolder;
+    float: right;
+    font-size: 29px;
+    trasition: .5s;
+}
+
+#botao-post:hover {
+	background-color: #797a80;
+}
