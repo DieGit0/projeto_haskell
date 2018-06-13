@@ -56,4 +56,10 @@ postSessionR:: Handler Value
 postSessionR = do
     session <- lookupSession "_NOME"
     sessionid <- lookupSession "_ID"
-    sendStatusJSON ok200 (object ["resp" .= (toJSON session),"id" .= (toJSON sessionid)])        
+    sendStatusJSON ok200 (object ["resp" .= (toJSON session),"id" .= (toJSON sessionid)])
+
+getDeslogarR :: Handler Html
+getDeslogarR = do 
+    deleteSession "_NOME"
+    deleteSession "_ID"
+    redirect AutenticarR 

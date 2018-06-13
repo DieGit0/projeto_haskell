@@ -12,3 +12,7 @@
 /cadastro CadastrarR POST GET
 
 /         AutenticarR POST GET
+
+/sessao SessionR POST
+
+/logout DeslogarR GET
