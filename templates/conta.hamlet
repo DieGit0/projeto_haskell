@@ -1,0 +1,47 @@
+<ul type="none">
+    <li>
+        <a #diretores href="#" class="btn btn-info botao-conta">
+            <b>
+                Diretores
+    <br>            
+    <li>
+        <a #categorias href="#" class="btn btn-info botao-conta">
+            <b>
+                Categorias 
+    <br>            
+    <li>
+        <a #filmes href="#" class="btn btn-info botao-conta">
+            <b>
+                Filmes 
+    <br>
+      
+<div id="lista">
+
+<div id="myModal" class="modal fade-scale" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            &times;  
+     
+      <div class="modal-body">
+            <input class="form-control" id="id_filme" style="display:none;">    
+            <div class="form-group">
+                <label class="label_edit_filme">
+                    Filme
+                <input class="form-control" id="nome_filme"><br>
+            <div class="form-group">
+                <label class="label_edit_filme">
+                    Diretor
+                <select class="form-control" id="diretores_select">
+                    <option id="diretor_atual">
+                        
+                <br>
+            <div class="form-group">
+                <button class="btn btn-success form-control" id="btn_atualizar_filme" onclick="atualizarFilme()">
+                    <b>
+                        Atualizar        
+
+
+     
