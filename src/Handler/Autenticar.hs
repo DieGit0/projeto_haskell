@@ -27,6 +27,10 @@ getAutenticarR = do
             _ -> do
                 redirect HomeR
 
+autentica :: Text -> Text -> HandlerT App IO (Maybe (Entity User))
+autentica email senha = runDB $ selectFirst [UserEmail ==. email
+                                            ,UserSenha ==. senha] []
+
 postAutenticarR:: Handler Html
 postAutenticarR = do 
     ((resultado,_),_) <- runFormPost $ loginPostForm
@@ -46,4 +50,4 @@ postAutenticarR = do
                     setSession "_ID"   (fromString (show (fromSqlKey id))) 
                     redirect HomeR
             redirect AutenticarR
-        _ -> redirect HomeR                
+        _ -> redirect HomeR
