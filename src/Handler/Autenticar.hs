@@ -26,3 +26,24 @@ getAutenticarR = do
                         $(widgetFile "login")
             _ -> do
                 redirect HomeR
+
+postAutenticarR:: Handler Html
+postAutenticarR = do 
+    ((resultado,_),_) <- runFormPost $ loginPostForm
+    case resultado of
+        FormSuccess ("root@root.com","root") -> do        
+            setSession "_NOME" "admin"
+            setSession "_ID"   "0"
+            redirect ContaR
+        FormSuccess (email,senha) -> do 
+            talvezUsuario <- autentica email senha
+            case talvezUsuario of 
+                Nothing -> do 
+                    --setMessage [shamlet|<div>Usuario nao encontrado/Senha invalida!|]
+                    redirect AutenticarR
+                Just (Entity id cli) -> do 
+                    setSession "_NOME" (userNome cli)
+                    setSession "_ID"   (fromString (show (fromSqlKey id))) 
+                    redirect HomeR
+            redirect AutenticarR
+        _ -> redirect HomeR                
