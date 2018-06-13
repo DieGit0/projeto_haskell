@@ -50,3 +50,10 @@ postListaDiretores:: Handler Value
 postListaDiretores = do
       diretoresLista <- runDB $ selectList [] [Asc DiretorNome]
       sendStatusJSON ok200 (object ["resp" .= (toJSON diretoresLista)])
+
+postListaCategorias:: Handler Value
+postListaCategorias = do
+     categoriasLista <- runDB $ selectList [] [Asc CategoriaNome]
+     sendStatusJSON ok200 (object ["resp" .= (toJSON categoriasLista)])
+
+           
