@@ -1,0 +1,45 @@
+body { 
+  background: url("/static/img/img_conta_user.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#titulo_conta {
+	margin-bottom: 26px;
+	margin-top: 21px;
+	font-weight: bolder;
+}
+
+.required {
+	margin-bottom: 20px;
+}
+
+#form_user {
+	color: #787c80;
+	font-weight: bolder;
+	width: 550px;
+	margin: 0 auto;
+    margin-top: 55px;
+    border: 2px outset #99989c;
+    padding: 29px;
+    background-color: #1b252d;
+    height: 635px;
+}
+
+#btn-user-conta {
+	color: #ffffff !important;
+	border: 1px;
+	background-color: #50515f;
+	color: #787c80;
+	font-size: 25px;
+    font-weight: bolder;
+    padding: 8px 193px;
+    trasition: .5s;
+}
+
+
+#btn-user-conta:hover {
+	background-color: #797a80;
+}
