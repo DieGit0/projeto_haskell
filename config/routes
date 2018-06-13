@@ -19,6 +19,7 @@
 
 /admin AdminR GET POST
 
-/conta           ContaR GET
+/conta            ContaR GET
 
-/listar_filmes   ListaFilmes POST
+/listar_filmes     ListaFilmes POST
+/listar_diretores  ListaDiretores POST

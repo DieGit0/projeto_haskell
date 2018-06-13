@@ -45,3 +45,8 @@ postListaFilmes = do
       filmesdid       <- return $ fmap (\(Filme _ _ _ filmedid) -> filmedid) filmes
       diretoresLista    <- sequence $ fmap (\did -> runDB $ selectList [DiretorId ==. did] []) filmesdid
       sendStatusJSON ok200 (object ["resp" .= (toJSON filmesLista),"dir" .= (toJSON diretoresLista)])
+
+postListaDiretores:: Handler Value
+postListaDiretores = do
+      diretoresLista <- runDB $ selectList [] [Asc DiretorNome]
+      sendStatusJSON ok200 (object ["resp" .= (toJSON diretoresLista)])
