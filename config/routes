@@ -9,6 +9,7 @@
 
 /inicio HomeR GET POST
 
+/diretor DiretorR POST
 /cadastro CadastrarR POST GET
 
 /         AutenticarR POST GET
