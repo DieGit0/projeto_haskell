@@ -56,4 +56,8 @@ postListaCategorias = do
      categoriasLista <- runDB $ selectList [] [Asc CategoriaNome]
      sendStatusJSON ok200 (object ["resp" .= (toJSON categoriasLista)])
 
-           
+postAddDiretores:: Text -> Handler Value
+postAddDiretores nome = do
+     did <- runDB $ insert (Diretor nome)
+     sendStatusJSON ok200 (object ["resp" .= (toJSON did)])
+   

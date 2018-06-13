@@ -24,3 +24,5 @@
 /listar_filmes     ListaFilmes     POST
 /listar_diretores  ListaDiretores  POST
 /listar_categorias ListaCategorias POST
+
+/add_diretor/#Text AddDiretores    POST
