@@ -10,3 +10,5 @@
 /inicio HomeR GET POST
 
 /cadastro CadastrarR POST GET
+
+/         AutenticarR POST GET
