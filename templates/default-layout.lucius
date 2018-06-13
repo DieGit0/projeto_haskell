@@ -71,3 +71,7 @@
 #message {
     margin-bottom: 40px;
 }
+
+.menu-superior {
+  height: 60px;
+}
