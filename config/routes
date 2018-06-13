@@ -30,3 +30,5 @@
 
 /add_categoria/#Text        AddCategorias POST
 /del_categoria/#CategoriaId DelCategorias POST
+
+/del_filme/#FilmeId         DelFilmes POST

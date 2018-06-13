@@ -78,4 +78,8 @@ postDelCategorias cid = do
       runDB $ delete cid
       sendStatusJSON ok200 (object ["resp" .= (toJSON True)])
 
-             
+postDelFilmes:: FilmeId -> Handler Value
+postDelFilmes id = do
+      runDB $ deleteWhere [CategoriaFilmeFid ==. id]
+      runDB $ delete id
+      sendStatusJSON ok200 (object ["resp" .= (toJSON True)])
