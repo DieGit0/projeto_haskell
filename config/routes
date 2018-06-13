@@ -9,4 +9,4 @@
 
 /inicio HomeR GET POST
 
-
+/cadastro CadastrarR POST GET

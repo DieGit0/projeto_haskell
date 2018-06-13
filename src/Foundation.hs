@@ -110,26 +110,28 @@ instance Yesod App where
 
         -- Define the menu items of the header.
         let menuItems =
-                [ NavbarLeft $ MenuItem
-                    { menuItemLabel = "Home"
-                    , menuItemRoute = HomeR
-                    , menuItemAccessCallback = True
-                    }
-                , NavbarLeft $ MenuItem
-                    { menuItemLabel = "Profile"
-                    , menuItemRoute = ProfileR
-                    , menuItemAccessCallback = isJust muser
-                    }
-                , NavbarRight $ MenuItem
-                    { menuItemLabel = "Login"
-                    , menuItemRoute = AuthR LoginR
-                    , menuItemAccessCallback = isNothing muser
-                    }
-                , NavbarRight $ MenuItem
-                    { menuItemLabel = "Logout"
-                    , menuItemRoute = AuthR LogoutR
-                    , menuItemAccessCallback = isJust muser
-                    }
+                [ 
+
+                --  NavbarLeft $ MenuItem
+                --     { menuItemLabel = "Home"
+                --     , menuItemRoute = HomeR
+                --     , menuItemAccessCallback = True
+                --     }
+                -- , NavbarLeft $ MenuItem
+                --     { menuItemLabel = "Profile"
+                --     , menuItemRoute = ProfileR
+                --     , menuItemAccessCallback = isJust muser
+                --     }
+                -- , NavbarRight $ MenuItem
+                --     { menuItemLabel = "Login"
+                --     , menuItemRoute = AuthR LoginR
+                --     , menuItemAccessCallback = isNothing muser
+                --     }
+                -- , NavbarRight $ MenuItem
+                --     { menuItemLabel = "Logout"
+                --     , menuItemRoute = AuthR LogoutR
+                --     , menuItemAccessCallback = isJust muser
+                --     }
                 ]
 
         let navbarLeftMenuItems = [x | NavbarLeft x <- menuItems]
@@ -166,6 +168,7 @@ instance Yesod App where
     isAuthorized FaviconR _ = return Authorized
     isAuthorized RobotsR _ = return Authorized
     isAuthorized (StaticR _) _ = return Authorized
+    isAuthorized CadastrarR _ = return Authorized
 
     -- the profile route requires that the user is authenticated, so we
     -- delegate to that function
