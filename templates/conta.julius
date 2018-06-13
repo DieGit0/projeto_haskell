@@ -1,0 +1,275 @@
+$(document).ready(function(){
+	$('#diretores').trigger('click');
+	$('#diretores').addClass("active");	
+});
+
+$('#diretores').click(function(){
+	$.ajax({
+		        url: "/listar_diretores",
+		        method: "post",
+		        dataType: "JSON",
+		        success: function(resultado){
+		        	$('.item_lista').each(function(){
+		                $(this).remove();
+		            });
+		            $("#lista").append("<div class='item_lista'><input class='input-conta' id='adicionar-diretor' style='color:black;'><button class='btn btn-success btn-add' onclick='addDiretorAjax()'><b>+</b></button>");
+		        	for(var i = 0; i < Object.keys(resultado.resp).length; i++) {
+		        		
+		        		if(resultado.resp[i].id != 16) { 
+		        			$("#lista").append("<div class='item_lista' id='diretor"+resultado.resp[i].id+"'>"+resultado.resp[i].nome+"<button class='btn btn-danger excluir' onclick='delDiretorAjax("+resultado.resp[i].id+")'>X</button></div>");
+		        		}
+		        	}
+		        }
+
+		    });
+});
+
+$('#categorias').click(function(){
+
+	if($('#diretores').hasClass("active")) {
+		$('#diretores').removeClass("active");	
+	}
+	
+	$.ajax({
+		        url: "/listar_categorias",
+		        method: "post",
+		        dataType: "JSON",
+		        success: function(resultado){		           
+		        	$('.item_lista').each(function(){
+		                $(this).remove();
+		            });
+		            $("#lista").append("<div class='item_lista'><input class='input-conta' id='adicionar-categoria' style='color:black;'><button class='btn btn-success btn-add' onclick='addCategoriaAjax()'><b>+</b></button>");
+		        	for(var i = 0; i < Object.keys(resultado.resp).length; i++) {
+		        		
+		        		$("#lista").append("<div class='item_lista' id='categoria"+resultado.resp[i].id+"'>"+resultado.resp[i].nome+"<button class='btn btn-danger excluir' onclick='delCategoriaAjax("+resultado.resp[i].id+")'>X</button></div>");
+		        	}
+		        }
+
+		    });
+});
+
+$('#filmes').click(function(){
+
+	if($('#diretores').hasClass("active")) {
+		$('#diretores').removeClass("active");	
+	}
+	
+	$.ajax({
+		        url: "/listar_filmes",
+		        method: "post",
+		        dataType: "JSON",
+		        success: function(resultado){
+		        	$('.item_lista').each(function(){
+		                $(this).remove();
+		            });
+
+
+
+		            $('#lista').append('<div class="container item_lista datatable"><div><table id="data_table" class="display" cellspacing="0" width="100%"></table></div></div>');
+
+		            var dataset = [];
+
+
+		        	for(var i = 0; i < Object.keys(resultado.resp).length; i++) {		        		
+		        		
+		        		dataset[i] = [resultado.resp[i].nome,resultado.dir[i][0].nome,"<button class='btn btn-success editar' data-toggle='modal' data-target='#myModal' onclick='modalFilme(\""+resultado.resp[i].nome+"\","+resultado.resp[i].id+",\""+resultado.dir[i][0].nome+"\","+resultado.dir[i][0].id+")'>Editar</button><button class='btn btn-danger excluir' onclick='delFilmeAjax("+resultado.resp[i].id+")'>Excluir</button>"];
+		        	}
+
+		        	$('#data_table').DataTable( {
+				        data: dataset,
+				        columns: [
+				            { title: "Filme" },
+				            { title: "Diretor" },
+				            { title: "Opções" }				            
+				        ],
+				        "language": {
+				            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
+				        }
+				    } );
+		        }
+
+		    });
+
+	
+
+	
+	
+});
+
+$('#usuario').click(function(){
+	$.ajax({
+		        url: "",
+		        method: "post",
+		        dataType: "JSON",
+		        success: function(resultado){		           
+
+		        
+		        }
+
+		    });
+});
+
+function addDiretorAjax(){	
+	if($('#adicionar-diretor').val()) { 
+		$.ajax({
+			        url: "/add_diretor/"+$('#adicionar-diretor').val(),
+			        method: "post",
+			        dataType: "JSON",
+			        success: function(resultado){			        	
+
+			        	$("#lista").append("<div class='item_lista' id='diretor"+resultado.resp+"'>"+$('#adicionar-diretor').val()+"<button class='btn btn-danger excluir' onclick='delDiretorAjax("+resultado.resp+")'>X</button></div>");
+
+			        	$('#adicionar-diretor').val("");
+			        }
+
+			    });
+	}	    
+	
+}
+
+function delDiretorAjax(id) {
+	swal({
+	  title: "Deseja excluir este diretor?",
+	  text: "Uma vez deletado não há como retornar a ação.",
+	  icon: "warning",
+	  buttons: ["Cancelar","Excluir"],
+	  dangerMode: true,
+	})
+	.then((willDelete) => {
+	  if (willDelete) {
+	  	$.ajax({
+			url: "/del_diretor/"+id,
+			method: "post",
+			dataType: "JSON",
+			success: function(resposta) {
+				$('#diretor'+id).remove();
+			}
+		});
+	    
+	  }
+	});
+	
+}
+
+function addCategoriaAjax() {
+	if($('#adicionar-categoria').val()) { 
+		$.ajax({
+			        url: "/add_categoria/"+$('#adicionar-categoria').val(),
+			        method: "post",
+			        dataType: "JSON",
+			        success: function(resultado){			        	
+
+			        	$("#lista").append("<div class='item_lista' id='categoria"+resultado.resp+"'>"+$('#adicionar-categoria').val()+"<button class='btn btn-danger excluir' onclick='delCategoriaAjax("+resultado.resp+")'>X</button></div>");
+
+			        	$('#adicionar-categoria').val("");
+			        }
+
+			    });
+	}	 
+}
+
+function delCategoriaAjax(id) {	
+
+	swal({
+	  title: "Deseja excluir esta categoria?",
+	  text: "Uma vez deletado não há como retornar a ação.",
+	  icon: "warning",
+	  buttons: ["Cancelar","Excluir"],
+	  dangerMode: true,
+	})
+	.then((willDelete) => {
+	  if (willDelete) {
+	  	$.ajax({
+			        url: "/del_categoria/"+id,
+			        method: "post",
+			        dataType: "JSON",
+			        success: function(resultado){			        	
+			        	$('#categoria'+id).remove();
+			        }
+
+			    });
+	    
+	  }
+	});	    
+}
+
+function delFilmeAjax(id){
+	swal({
+	  title: "Deseja excluir este filme?",
+	  text: "Uma vez deletado não há como retornar a ação.",
+	  icon: "warning",
+	  buttons: ["Cancelar","Excluir"],
+	  dangerMode: true,
+	})
+	.then((willDelete) => {
+	  if (willDelete) {
+	  	$.ajax({
+			        url: "/del_filme/"+id,
+			        method: "post",
+			        dataType: "JSON",
+			        success: function(resultado){			        	
+			        	$('#filmes').trigger('click');
+			        }
+
+			    });
+	    
+	  }
+	});	
+
+}
+
+function modalFilme(nomeFilme, idFilme, nomeDir, idDir){
+
+	$(".dir_opcao").each(function(){
+		$(this).remove();
+	});
+
+	$('#nome_filme').val(nomeFilme);
+	$('#id_filme').val(idFilme);
+	$('#diretor_atual').html(nomeDir);
+	$('#diretor_atual').attr('value', idDir);
+
+	$.ajax({
+		        url: "/listar_diretores",
+		        method: "post",
+		        dataType: "JSON",
+		        success: function(resultado){
+
+		        	for(var i = 0; i < Object.keys(resultado.resp).length; i++) {
+		        		
+		        		if(resultado.resp[i].id != idDir) { 
+		        			$("#diretores_select").append("<option class='dir_opcao' value='"+resultado.resp[i].id+"'>"+resultado.resp[i].nome+"</option>");
+		        		}
+		        	}
+
+		        }
+
+		    });
+}
+
+function atualizarFilme() {
+
+	swal({
+	  title: "Deseja atualizar este filme?",
+	  text: "",
+	  icon: "warning",
+	  buttons: ["Cancelar","Confirmar"],
+	  dangerMode: true,
+	})
+	.then((willDelete) => {
+	  if (willDelete) {
+	  	$.ajax({
+			        url: "/atualizar_filme/"+$('#id_filme').val()+"/"+$('#nome_filme').val()+"/"+$('#diretores_select').val(),
+			        method: "post",
+			        dataType: "JSON",
+			        success: function(resultado){
+			        	$('#myModal').modal('hide');			        	
+			        	$('#filmes').trigger('click');
+			        }
+
+			    });
+	    
+	  }
+	});
+	
+}
