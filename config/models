@@ -24,4 +24,8 @@ Categoria json
 CategoriaFilme json
     cid   CategoriaId
     fid   FilmeId
-    deriving Show            
+    deriving Show
+
+Diretor json
+    nome          Text sqltype=varchar(255) default=NULL
+    deriving Show                
