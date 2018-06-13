@@ -15,4 +15,13 @@ Filme json
     arquivo       Text sqltype=varchar(255) default=NULL
     did           DiretorId default=NULL
     deriving Show
-    deriving Eq    
+    deriving Eq
+
+Categoria json
+    nome          Text sqltype=varchar(255) default=NULL
+    deriving Show
+
+CategoriaFilme json
+    cid   CategoriaId
+    fid   FilmeId
+    deriving Show            
