@@ -22,3 +22,16 @@ getHomeR = do
             diretoresLista <- runDB $ selectList [DiretorId !=. (toSqlKey 16)] [Asc DiretorNome]  
             defaultLayout $ do
                 $(widgetFile "homepage")
+
+postHomeR :: Handler Value
+postHomeR = do
+    nome <- runInputPost $ ireq textField "nome"
+    case nome of
+        " " -> do
+            filmesLista <- runDB $ selectList [] [Asc FilmeNome]
+            filmes      <- return $ fmap (\(Entity _ filme) -> filme) filmesLista
+            sendStatusJSON ok200 (object ["resp" .= (toJSON filmes)])
+        _ -> do
+            filmesLista <- runDB $ selectList [Filter FilmeNome (Left $ "%"++nome++"%") (BackendSpecificFilter "LIKE")] [Asc FilmeNome]
+            filmes      <- return $ fmap (\(Entity _ filme) -> filme) filmesLista
+            sendStatusJSON ok200 (object ["resp" .= (toJSON filmes)])
