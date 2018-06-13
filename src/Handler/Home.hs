@@ -42,3 +42,12 @@ postDiretorR  = do
     filmesLista <- runDB $ selectList [FilmeDid ==. (toSqlKey diretorid)] [Asc FilmeNome]
     filmes      <- return $ fmap (\(Entity _ filme) -> filme) filmesLista
     sendStatusJSON ok200 (object ["resp" .= (toJSON filmes)])
+
+postCategoriaR :: Handler Value
+postCategoriaR = do
+    categoriaid    <- runInputPost $ ireq intField "categoriaId"
+    filmescategoriaLista    <- runDB $ selectList [CategoriaFilmeCid ==. (toSqlKey categoriaid)] [Asc CategoriaFilmeFid]
+    filmescategoriasid       <- return $ fmap (\(Entity _ categoriafilme) -> categoriafilme) filmescategoriaLista
+    filmesid       <- return $ fmap (\(CategoriaFilme _ filmeid) -> filmeid) filmescategoriasid 
+    filmesLista    <- sequence $ fmap (\fid -> runDB $ selectList [FilmeId ==. fid] [Asc FilmeNome]) filmesid
+    sendStatusJSON ok200 (object ["resp" .= (toJSON filmesLista)])    
