@@ -60,4 +60,9 @@ postAddDiretores:: Text -> Handler Value
 postAddDiretores nome = do
      did <- runDB $ insert (Diretor nome)
      sendStatusJSON ok200 (object ["resp" .= (toJSON did)])
-   
+
+postDelDiretores:: DiretorId -> Handler Value
+postDelDiretores did = do
+     runDB $ updateWhere [FilmeDid ==. did] [FilmeDid =. (toSqlKey 16)]
+     runDB $ delete did
+     sendStatusJSON ok200 (object ["resp" .= (toJSON True)])

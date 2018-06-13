@@ -25,4 +25,5 @@
 /listar_diretores  ListaDiretores  POST
 /listar_categorias ListaCategorias POST
 
-/add_diretor/#Text AddDiretores    POST
+/add_diretor/#Text      AddDiretores POST
+/del_diretor/#DiretorId DelDiretores POST
