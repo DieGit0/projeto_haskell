@@ -1,0 +1,21 @@
+$(document).ready(function(){
+	$.ajax({
+		        url: "/sessao",
+		        method: "post",
+		        dataType: "JSON",
+		        success: function(resultado){		           
+
+		           if(resultado.resp) {
+		           		$('#nav-esquerda').append("<li><a href='/inicio'>Home</a></li>");
+		           		if(resultado.resp == "admin")	
+		           			$('#nav-direita').append("<li><a href='/admin'>Postar</a></li><li><a href='/conta'>"+ resultado.resp+ "<li><a href='/logout'>Logout");
+		           		else
+		           			$('#nav-direita').append("<li><a href='/conta'>"+ resultado.resp+ "<li><a href='/logout'>Logout");	
+		           }else{
+		           		$('#nav-direita').append("<li><a href=@{CadastrarR}>Cadastrar<li><a href='/'>Login");
+		           }
+		        
+		        }
+
+		    });
+})

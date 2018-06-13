@@ -1,0 +1,6 @@
+<form #form_cadastro method=post action=@{CadastrarR} enctype=#{enctype}>
+    <h2 id="titulo_cadastro">
+        Cadastro
+    ^{widget}
+    <br>
+    <input #botao-cadastrar .btn .btn-success type="submit" value="Cadastrar">

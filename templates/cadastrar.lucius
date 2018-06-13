@@ -1,0 +1,43 @@
+body { 
+  background: url("/static/img/img_cadastro.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#form_cadastro {
+	height: 700px;
+	margin: 29px 513px 0 auto !important;
+    width: 636px;
+    color: #787c80;
+    padding: 69px;
+    padding-top: 40px;
+    border: 2px outset #99989c;
+    background-color: #1b252d;    
+    padding-bottom: 121px;
+}
+
+#botao-cadastrar {
+	border: 1px;
+    background-color: #50515f;
+    padding: 11px 185px;
+    font-weight: bolder;
+    float: right;
+    font-size: 28px;
+    trasition: .5s;
+    margin-top: 37px;
+}
+
+#botao-cadastrar:hover {
+	background-color: #797a80;
+}
+
+#titulo_cadastro {
+	margin-top: 0;
+	font-weight: bolder;
+}
+
+.required {
+	margin-top: 30px;
+}
