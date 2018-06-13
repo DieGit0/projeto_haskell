@@ -1,0 +1,7 @@
+<form method="POST" id="form_user" action="">
+    <h2 id="titulo_conta">
+        Minha Conta
+    ^{widget}
+    <br>
+    <input #btn-user-conta .btn .btn-success type="submit" value="Atualizar">
+<input id="id_user" hidden>
