@@ -74,6 +74,7 @@ type DB a = forall (m :: * -> *).
 instance Yesod App where
     -- Controls the base of generated URLs. For more information on modifying,
     -- see: https://github.com/yesodweb/yesod/wiki/Overriding-approot
+    maximumContentLength _ _ = Just $ 700 * 1024 * 1024 -- 10 megabytes
     approot :: Approot App
     approot = ApprootRequest $ \app req ->
         case appRoot $ appSettings app of
@@ -110,21 +111,20 @@ instance Yesod App where
 
         -- Define the menu items of the header.
         let menuItems =
-                [ 
-
-                --  NavbarLeft $ MenuItem
+                [
+                --   NavbarLeft $ MenuItem
                 --     { menuItemLabel = "Home"
                 --     , menuItemRoute = HomeR
                 --     , menuItemAccessCallback = True
                 --     }
-                -- , NavbarLeft $ MenuItem
-                --     { menuItemLabel = "Profile"
-                --     , menuItemRoute = ProfileR
-                --     , menuItemAccessCallback = isJust muser
+                -- , NavbarRight $ MenuItem
+                --     { menuItemLabel = "Cadastrar"
+                --     , menuItemRoute =  CadastrarR
+                --     , menuItemAccessCallback = isNothing muser
                 --     }
                 -- , NavbarRight $ MenuItem
                 --     { menuItemLabel = "Login"
-                --     , menuItemRoute = AuthR LoginR
+                --     , menuItemRoute = AutenticarR
                 --     , menuItemAccessCallback = isNothing muser
                 --     }
                 -- , NavbarRight $ MenuItem
@@ -161,22 +161,36 @@ instance Yesod App where
         :: Route App  -- ^ The route the user is visiting.
         -> Bool       -- ^ Whether or not this is a "write" request.
         -> Handler AuthResult
-    -- Routes not requiring authentication.
+     -- Routes not requiring authentication.
     isAuthorized (AuthR _) _ = return Authorized
-    isAuthorized CommentR _ = return Authorized
+    -- isAuthorized CommentR _ = return Authorized
     isAuthorized HomeR _ = return Authorized
+    isAuthorized DiretorR _ = return Authorized
+    isAuthorized CategoriaR _ = return Authorized
+    isAuthorized AutenticarR _ = return Authorized
     isAuthorized FaviconR _ = return Authorized
     isAuthorized RobotsR _ = return Authorized
     isAuthorized (StaticR _) _ = return Authorized
+    isAuthorized AdminR _ = return Authorized
     isAuthorized CadastrarR _ = return Authorized
-    isAuthorized AutenticarR _ = return Authorized
     isAuthorized SessionR _ = return Authorized
     isAuthorized DeslogarR _ = return Authorized
-    isAuthorized AdminR _ = return Authorized
-
+    isAuthorized ContaR _ = return Authorized
+    isAuthorized ListaDiretores _ = return Authorized
+    isAuthorized ListaFilmes _ = return Authorized
+    isAuthorized ListaCategorias _ = return Authorized
+    isAuthorized (AddDiretores _) _ = return Authorized
+    isAuthorized (DelDiretores _) _ = return Authorized
+    isAuthorized (AddCategorias _) _ = return Authorized
+    isAuthorized (DelCategorias _) _ = return Authorized
+    isAuthorized (DelFilmes _) _ = return Authorized
+    isAuthorized (CarregarUser _) _ = return Authorized
+    isAuthorized (AtualizarUser _ _ _ _ _) _ = return Authorized
+    isAuthorized (AtualizarFilme _ _ _) _ = return Authorized
+    -- isAuthorized ProfileR _ = isAuthenticated
     -- the profile route requires that the user is authenticated, so we
     -- delegate to that function
-    isAuthorized ProfileR _ = isAuthenticated
+    --isAuthorized ProfileR _ = isAuthenticated
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
@@ -224,7 +238,6 @@ instance YesodBreadcrumbs App where
         -> Handler (Text, Maybe (Route App))
     breadcrumb HomeR = return ("Home", Nothing)
     breadcrumb (AuthR _) = return ("Login", Just HomeR)
-    breadcrumb ProfileR = return ("Profile", Just HomeR)
     breadcrumb  _ = return ("home", Nothing)
 
 -- How to run database actions.
@@ -252,16 +265,16 @@ instance YesodAuth App where
     redirectToReferer :: App -> Bool
     redirectToReferer _ = True
 
-    authenticate :: (MonadHandler m, HandlerSite m ~ App)
-                 => Creds App -> m (AuthenticationResult App)
-    authenticate creds = liftHandler $ runDB $ do
-        x <- getBy $ UniqueUser $ credsIdent creds
-        case x of
-            Just (Entity uid _) -> return $ Authenticated uid
-            Nothing -> Authenticated <$> insert User
-                { userIdent = credsIdent creds
-                , userPassword = Nothing
-                }
+    -- authenticate :: (MonadHandler m, HandlerSite m ~ App)
+    --              => Creds App -> m (AuthenticationResult App)
+    -- authenticate creds = liftHandler $ runDB $ do
+    --     x <- getBy $ UniqueUser $ credsIdent creds
+    --     case x of
+    --         Just (Entity uid _) -> return $ Authenticated uid
+    --         Nothing -> Authenticated <$> insert User
+    --             { userIdent = credsIdent creds
+    --             , userPassword = Nothing
+    --             }
 
     -- You can add other plugins like Google Email, email or OAuth here
     authPlugins :: App -> [AuthPlugin App]
