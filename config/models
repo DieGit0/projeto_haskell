@@ -8,3 +8,11 @@ User json
     dataNasc    Day
     UniqueEmail email
     deriving Show
+
+Filme json
+    nome          Text sqltype=varchar(255) default=NULL
+    foto          Text sqltype=varchar(255) default=NULL
+    arquivo       Text sqltype=varchar(255) default=NULL
+    did           DiretorId default=NULL
+    deriving Show
+    deriving Eq    
