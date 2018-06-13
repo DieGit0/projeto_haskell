@@ -16,3 +16,5 @@
 /sessao SessionR POST
 
 /logout DeslogarR GET
+
+/admin AdminR GET POST

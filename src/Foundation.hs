@@ -170,6 +170,9 @@ instance Yesod App where
     isAuthorized (StaticR _) _ = return Authorized
     isAuthorized CadastrarR _ = return Authorized
     isAuthorized AutenticarR _ = return Authorized
+    isAuthorized SessionR _ = return Authorized
+    isAuthorized DeslogarR _ = return Authorized
+    isAuthorized AdminR _ = return Authorized
 
     -- the profile route requires that the user is authenticated, so we
     -- delegate to that function
