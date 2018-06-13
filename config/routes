@@ -27,4 +27,6 @@
 
 /add_diretor/#Text      AddDiretores  POST
 /del_diretor/#DiretorId DelDiretores  POST
-/add_categoria/#Text    AddCategorias POST
+
+/add_categoria/#Text        AddCategorias POST
+/del_categoria/#CategoriaId DelCategorias POST

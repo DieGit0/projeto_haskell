@@ -70,4 +70,12 @@ postDelDiretores did = do
 postAddCategorias:: Text -> Handler Value
 postAddCategorias nome = do
       cid <- runDB $ insert (Categoria nome)
-      sendStatusJSON ok200 (object ["resp" .= (toJSON cid)])     
+      sendStatusJSON ok200 (object ["resp" .= (toJSON cid)])
+
+postDelCategorias:: CategoriaId -> Handler Value
+postDelCategorias cid = do
+      runDB $ deleteWhere [CategoriaFilmeCid ==. cid]
+      runDB $ delete cid
+      sendStatusJSON ok200 (object ["resp" .= (toJSON True)])
+
+             
