@@ -1,0 +1,6 @@
+<form #form_post method=post action=@{AdminR} enctype=#{enctype}>
+    <h2 id="titulo_post">
+        Postar Filme
+    ^{widget}
+    <br>
+    <input #botao-post .btn .btn-success type="submit" value="Postar">
