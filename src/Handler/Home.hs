@@ -35,3 +35,10 @@ postHomeR = do
             filmesLista <- runDB $ selectList [Filter FilmeNome (Left $ "%"++nome++"%") (BackendSpecificFilter "LIKE")] [Asc FilmeNome]
             filmes      <- return $ fmap (\(Entity _ filme) -> filme) filmesLista
             sendStatusJSON ok200 (object ["resp" .= (toJSON filmes)])
+
+postDiretorR :: Handler Value
+postDiretorR  = do
+    diretorid   <- runInputPost $ ireq intField "diretorId"
+    filmesLista <- runDB $ selectList [FilmeDid ==. (toSqlKey diretorid)] [Asc FilmeNome]
+    filmes      <- return $ fmap (\(Entity _ filme) -> filme) filmesLista
+    sendStatusJSON ok200 (object ["resp" .= (toJSON filmes)])
