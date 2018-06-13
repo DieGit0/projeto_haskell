@@ -36,3 +36,4 @@
 /carregar_user/#UserId      CarregarUser POST
 
 /atualizar_user/#UserId/#Text/#Text/#Text/#Day AtualizarUser POST
+/atualizar_filme/#FilmeId/#Text/#DiretorId     AtualizarFilme POST

@@ -92,4 +92,9 @@ postCarregarUser uid = do
 postAtualizarUser:: UserId -> Text -> Text -> Text -> Day -> Handler Value
 postAtualizarUser uid nome email senha dataNasc = do
      runDB $ updateWhere [UserId ==. uid] [UserNome =. nome, UserEmail =. email, UserSenha =. senha, UserDataNasc =. dataNasc]
+     sendStatusJSON ok200 (object ["resp" .= (toJSON True)])
+
+postAtualizarFilme:: FilmeId -> Text -> DiretorId -> Handler Value
+postAtualizarFilme fid nome did = do
+     runDB $ updateWhere [FilmeId ==. fid] [FilmeNome =. nome, FilmeDid =. did]
      sendStatusJSON ok200 (object ["resp" .= (toJSON True)])         
