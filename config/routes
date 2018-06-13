@@ -18,3 +18,5 @@
 /logout DeslogarR GET
 
 /admin AdminR GET POST
+
+/conta         ContaR GET
